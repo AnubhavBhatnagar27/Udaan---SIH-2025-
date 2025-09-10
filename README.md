@@ -1,70 +1,84 @@
-# Getting Started with Create React App
+# Udaan ✈️  
+**AI-based Drop-out Prediction and Counseling System**  
+*Smart India Hackathon 2025 Project*  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+## 🚀 Project Overview
 
-In the project directory, you can run:
+**Udaan** is an AI-powered solution designed to predict student drop-outs at an early stage and provide personalized counseling support to mitigate the risk. Built for the Smart India Hackathon 2025, our system harnesses the power of machine learning and data analytics to ensure that no student is left behind.
 
-### `npm start`
+By identifying at-risk students through academic, behavioral, and socio-economic data, Udaan empowers institutions to intervene proactively and offer targeted guidance and support.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🔍 Problem Statement
 
-### `npm test`
+**Problem Statement ID**: SIH25102  
+**Title**: AI-based Drop-out Prediction and Counseling System  
+**Description**: Design a system that can predict student drop-outs using historical and real-time data, and offer AI-driven counseling suggestions or interventions to reduce drop-out rates in educational institutions.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 👨‍💻 Team Information
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Team Name**: BitCrew  
+- **Institute**: Oriental Institute of Science and Technology
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🧠 Key Features
 
-### `npm run eject`
+- 📊 **Predictive Analytics**: Uses machine learning models trained on student data to predict drop-out risk.
+- 🤖 **AI-Driven Counseling**: Recommends personalized interventions based on the risk profile.
+- 📈 **Performance Dashboard**: Visual representation of risk trends and counseling outcomes.
+- 🔒 **Secure Data Handling**: Ensures student data privacy and compliance with education data standards.
+- 🧍‍♀️🧍‍♂️ **Multi-Stakeholder Access**: Interfaces for students, counselors, and administrators.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🛠️ Tech Stack
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **Frontend**: React.js / HTML5 / CSS3  
+- **Backend**: Node.js / Express.js  
+- **Machine Learning**: Python (Scikit-learn, Pandas, NumPy)  
+- **Database**: MongoDB / MySQL  
+- **Deployment**: Docker / Heroku / Render / AWS (optional)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## 📦 Folder Structure (Prototype)
+udaan/
+├── node_modules/
+├── public/
+├── src/
+├── .gitignore
+├── package-lock.json
+├── package.json
+└── README.md
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## 🔮 Future Scope
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Integration with national academic databases for broader insights.
+- Multilingual support for wider accessibility.
+- Real-time sentiment analysis via chatbot interactions.
+- Mobile app version for student accessibility.
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 🤝 Acknowledgements
 
-### Making a Progressive Web App
+We thank **Smart India Hackathon 2025** for the opportunity to innovate and contribute towards solving real-world challenges in the education sector.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+> “Education is the passport to the future, for tomorrow belongs to those who prepare for it today.” – Malcolm X
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
