@@ -1,0 +1,27 @@
+.student-page {
+  display: flex;
+  min-height: 100vh;
+  background: #f7f7f7;
+}
+
+.student-page-main {
+  flex: 1;
+  padding: 20px;
+}
+
+.student-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.college-name {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.student-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 20px;
+}

@@ -1,0 +1,30 @@
+.student-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.student-header {
+  display: flex;
+  gap: 15px;
+}
+
+.student-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.risk-badge {
+  background: #e74c3c;
+  color: #fff;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.guardian {
+  margin-top: 10px;
+  font-size: 14px;
+}
