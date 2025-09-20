@@ -1,6 +1,7 @@
 // src/App.jsx
 import React, { useRef, useState } from "react";
 import logo from "./assets/logo.jpg";
+import uploadIcon from "./assets/upload-icon.png"; // 👈 yaha apna icon import karein
 import {
   BrowserRouter as Router,
   Routes,
@@ -132,7 +133,6 @@ function Sidebar() {
     >
       <div className="logo-section">
         <img src={logo} alt="App Logo" className="sidebar-logo" />
-        {isExpanded && <span className="logo-text">Udaan</span>}
       </div>
 
       <nav className="nav-buttons">
@@ -191,6 +191,8 @@ function ProfileSection() {
   const [profileImg, setProfileImg] = useState(null);
   const avatarInputRef = useRef(null);
   const fileInputRef = useRef(null);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [message, setMessage] = useState("");
 
   const handleAvatarChange = (event) => {
     const file = event.target.files[0];
@@ -203,7 +205,40 @@ function ProfileSection() {
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    if (file) console.log("Selected file:", file.name);
+    if (file) {
+      setSelectedFile(file);
+      setMessage("");
+      console.log("Selected file:", file.name);
+    }
+  };
+
+  const handleUpload = async () => {
+    if (!selectedFile) {
+      setMessage("Please select a file first.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+
+    try {
+      const response = await fetch("http://localhost:8000/api/upload/", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setMessage(
+          `✅ Upload successful! Inserted: ${data.inserted}, Skipped: ${data["skipped (duplicates)"]}`
+        );
+      } else {
+        setMessage(`❌ Upload failed: ${data.error || "Unknown error"}`);
+      }
+    } catch (error) {
+      setMessage("❌ Upload failed: Network error or server not reachable.");
+    }
   };
 
   return (
@@ -213,7 +248,9 @@ function ProfileSection() {
           className="profile-avatar"
           onClick={() => avatarInputRef.current.click()}
           style={{
-            backgroundImage: profileImg ? `url(${profileImg})` : "none",
+            backgroundImage: profileImg
+              ? `url(${profileImg})`
+              : "url(/assets/mentor.png)",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -229,32 +266,58 @@ function ProfileSection() {
           <h2>Manav Khare</h2>
           <p>ID.No: 9595******</p>
           <p>
+            <strong>
+              Institute : Oriental Institute of Science and Technology
+            </strong>
+          </p>
+          <p>
             <strong>Branch:</strong> Computer Science
           </p>
           <p>
-            <strong>Semester:</strong> 5th
+            <strong>Session:</strong> 2025-26
           </p>
         </div>
       </div>
 
       <div className="profile-right">
         <div className="upload-box">
+          {/* Icon in top-right corner */}
+          <img src={uploadIcon} alt="Upload Icon" className="upload-icon" />
+          <img
+  src={uploadIcon}
+  alt="Upload Icon"
+  className="upload-icon"
+  onClick={() => window.open("/student-data.xlsx", "_blank")}  
+/>
+
+          <h3>Upload Student Data</h3>
           <p>
             <strong>Select file or drag & drop</strong>
           </p>
-          <small>png, jpg, pdf, docx accepted</small>
+          <small>.csv, .xlsx files accepted (Max: 50 MB)</small>
           <input
             type="file"
             ref={fileInputRef}
             onChange={handleFileChange}
+            accept=".csv,.xlsx"
             style={{ display: "none" }}
           />
           <button
             className="upload-btn"
             onClick={() => fileInputRef.current.click()}
+            style={{ marginRight: "10px" }}
+          >
+            Select File
+          </button>
+          <button
+            className="upload-btn"
+            onClick={handleUpload}
+            disabled={!selectedFile}
           >
             Upload
           </button>
+          {selectedFile && <p>Selected file: {selectedFile.name}</p>}
+          {message && <p style={{ marginTop: "10px" }}>{message}</p>}
         </div>
       </div>
     </div>
@@ -265,20 +328,34 @@ function RiskAnalysis() {
   const risks = [
     { level: "HIGH", value: 20, color: "red", change: "+37.8% this month" },
     { level: "MEDIUM", value: 40, color: "blue", change: "-2% this month" },
-    { level: "LOW", value: 10, color: "yellow", change: "+11% this week" },
+    { level: "LOW", value: 10, color: "yellow", change: "+11% this month" },
   ];
 
   return (
     <div className="risk-analysis">
-      <h3 className="risk-title">📊 Risk Analysis</h3>
+      <div className="risk-title">
+        <h3>Risk Analysis</h3>
+      </div>
+
       <div className="risk-items">
-        {risks.map((risk) => (
-          <div key={risk.level} className="risk-item">
-            <div className={`risk-circle ${risk.color}`}>{risk.value}</div>
-            <p className="risk-level">{risk.level}</p>
-            <p className="risk-change">{risk.change}</p>
-          </div>
-        ))}
+        {risks.map((risk) => {
+          const isUp = risk.change.startsWith("+");
+          const arrow = isUp ? "↑" : "↓";
+          const changeValue = risk.change.substring(1);
+
+          return (
+            <div key={risk.level} className="risk-item">
+              <div className={`risk-circle ${risk.color}`}>{risk.value}</div>
+              <div className="risk-info">
+                <p className="risk-level">{risk.level}</p>
+                <p className="risk-value">{risk.value}</p>
+                <p className={`risk-change ${isUp ? "up" : "down"}`}>
+                  <span className="arrow">{arrow}</span> {changeValue}
+                </p>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -288,10 +365,18 @@ function StudentTable() {
   const [search, setSearch] = useState("");
 
   const students = [
-    { name: "RAHUL", risk: "HIGH", daysIn: 10 },
-    { name: "UMESH", risk: "HIGH", daysIn: 12 },
-    { name: "SNEHA", risk: "MEDIUM", daysIn: 7 },
-    { name: "SWATI", risk: "LOW", daysIn: 3 },
+    { name: "Aadarsh Thakur", risk: "High", daysIn: 10 },
+    { name: "Rahul Sharma", risk: "Medium", daysIn: 6 },
+    { name: "Sneha Verma", risk: "Low", daysIn: 4 },
+    { name: "Umesh Farkade", risk: "High", daysIn: 15 },
+    { name: "Kannat Pawar", risk: "Low", daysIn: 1 },
+    { name: "Sneha Bhargav", risk: "Medium", daysIn: 8 },
+    { name: "Kunal Rai", risk: "High", daysIn: 12 },
+    { name: "Pankaj Choudhary", risk: "High", daysIn: 14 },
+    { name: "Aarav Sharma", risk: "Medium", daysIn: 6 },
+    { name: "Neha Sharma", risk: "Low", daysIn: 4 },
+    { name: "Priya Kumari", risk: "High", daysIn: 13 },
+    { name: "Khayti Pawar", risk: "Low", daysIn: 3 },
   ];
 
   const filtered = students.filter((s) =>
